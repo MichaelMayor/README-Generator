@@ -87,8 +87,7 @@ function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, err => {
         if (err) {
             return console.log(err);
-        } 
-        else {
+        } else {
             console.log("Your README has been created")
         }
     });
@@ -96,10 +95,19 @@ function writeToFile(fileName, data) {
 //promisify for use in async await
 const writeToFileAsync = util.promisify(writeToFile);
 
+//axios function to get Github info
+async function getUser(userResponses) {
+    try {
+        let response = await axios.get(`https://api.github.com/users/${userResponses.username}`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 // function to initialize program
 async function init() {
     try {
-
         // Prompt Inquirer questions
         const userResponses = await inquirer.prompt(questions);
         console.log(userResponses);
@@ -114,9 +122,7 @@ async function init() {
 
         // Write markdown to file
         await writeToFileAsync('ExampleREADME.md', markdown);
-
-    } 
-    catch (error) {
+    } catch (error) {
         console.log(error);
     }
 };
