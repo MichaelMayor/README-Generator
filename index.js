@@ -113,8 +113,8 @@ async function init() {
         console.log(userResponses);
 
         // Call GitHub api for user info
-        const userInfo = await getUser(userResponses);
-        console.log(userInfo);
+        const githubInfo = await getUser(userResponses);
+        console.log(githubInfo);
 
         // Pass userResponses and userInfo to generateMarkdown
         // const markdown = generateMarkdown(userResponses, userInfo);
