@@ -8,7 +8,7 @@ const generateMarkdown = require('./utils/generateMarkdown.js');
 // Inquirer questions array
 const questions = [{
         type: 'input',
-        message: "What is your GitHub username? (required)",
+        message: "What is your GitHub username? (Required)",
         name: 'username',
         validate: function (answer) {
             if (answer.length < 1) {
@@ -20,7 +20,7 @@ const questions = [{
     },
     {
         type: 'input',
-        message: "What is the name of the GitHub repo for the project? (required)",
+        message: "What is the name of the GitHub repo for the project? (Required)",
         name: 'repo',
         validate: function (answer) {
             if (answer.length < 1) {
@@ -44,7 +44,7 @@ const questions = [{
     },
     {
         type: 'input',
-        message: "Write a description of your project.(Required)",
+        message: "Write a description of your project. (Required)",
         name: 'description',
         validate: function (answer) {
             if (answer.length < 1) {
@@ -66,7 +66,7 @@ const questions = [{
     },
     {
         type: 'input',
-        message: "How can other developerscontribute to your project? (Optional)",
+        message: "How can other developers contribute to your project? (Optional)",
         name: 'contributing'
     },
     {
@@ -117,11 +117,11 @@ async function init() {
         console.log(userInfo);
 
         // Pass userResponses and userInfo to generateMarkdown
-        const markdown = generateMarkdown(userResponses, userInfo);
-        console.log(markdown);
+        // const markdown = generateMarkdown(userResponses, userInfo);
+        // console.log(markdown);
 
-        // Write markdown to file
-        await writeToFileAsync('ExampleREADME.md', markdown);
+        // // Write markdown to file
+        // await writeToFileAsync('ExampleREADME.md', markdown);
     } catch (error) {
         console.log(error);
     }
