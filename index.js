@@ -83,7 +83,18 @@ const questions = [{
 ];
 
 // function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, err => {
+        if (err) {
+            return console.log(err);
+        } 
+        else {
+            console.log("Your README has been created")
+        }
+    });
+}
+//promisify for use in async await
+const writeToFileAsync = util.promisify(writeToFile);
 
 // function to initialize program
 async function init() {
@@ -92,19 +103,20 @@ async function init() {
         // Prompt Inquirer questions
         const userResponses = await inquirer.prompt(questions);
         console.log(userResponses);
-    
+
         // Call GitHub api for user info
         const userInfo = await getUser(userResponses);
         console.log(userInfo);
-    
+
         // Pass userResponses and userInfo to generateMarkdown
         const markdown = generateMarkdown(userResponses, userInfo);
         console.log(markdown);
-    
-        // Write markdown to file
-        await writeFileAsync('ExampleREADME.md', markdown);
 
-    } catch (error) {
+        // Write markdown to file
+        await writeToFileAsync('ExampleREADME.md', markdown);
+
+    } 
+    catch (error) {
         console.log(error);
     }
 };
