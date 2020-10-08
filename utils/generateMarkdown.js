@@ -102,6 +102,30 @@ function generateMarkdown(userResponses, userInfo) {
       
       ${userResponses.license}
       `;
+
+  // Questions section
+  draftReadme +=
+    `
+    ---
+    
+    ## Questions?
+   
+    GitHub: [@${userInfo.login}](${userInfo.url})
+    `;
+
+  // Add GitHub email to Developer section
+  if (userInfo.email !== null) {
+
+    draftReadme +=
+      `
+    Email: ${userInfo.email}
+    `
+  };
+
+
+  // Return markdown
+  return draftReadme;
+
 }
 
 module.exports = generateMarkdown;
