@@ -1,9 +1,10 @@
 // function to generate markdown for README
-function generateMarkdown(userResponses, userInfo) {
+function generateMarkdown(userResponses, githubInfo) {
 
 
   // Generate Table of Contents
-  let draftToC = `## Table of Contents
+  let draftToC = `
+### Table of Contents
 
   * [Description](#description)`;
 
@@ -31,10 +32,11 @@ function generateMarkdown(userResponses, userInfo) {
   * [License](#license)`
 
   // Generate markdown the README Title, License Badge, and Repo badge
+  let licenseURL = userResponses.license.split(' ').join('_')
   let draftReadme =
     `# ${userResponses.title}
 
- ![GitHub Last Commit](https://img.shields.io/github/last-commit/${userResponses.username}/${userResponses.repo})![License: ${userResponses.license}](https://img.shields.io/badge/License-${userResponses.license}-blue.svg)`
+![GitHub Last Commit](https://img.shields.io/github/last-commit/${githubInfo.login}/${userResponses.repo})![License: ${userResponses.license}](https://img.shields.io/badge/License-${licenseURL}-blue.svg)`
 
   // Add Table of Contents to markdown
   draftReadme += draftToC;
@@ -42,10 +44,10 @@ function generateMarkdown(userResponses, userInfo) {
   draftReadme +=
     `
  
- ## Description 
+## Description 
  
  
- ${userResponses.description}`
+${userResponses.description}`
 
   // Installation section
   if (userResponses.installation !== '') {
@@ -53,9 +55,9 @@ function generateMarkdown(userResponses, userInfo) {
     draftReadme +=
       `
       
-      ## Installation
+## Installation
       
-      ${userResponses.installation}`
+${userResponses.installation}`
   };
 
 
@@ -66,9 +68,9 @@ function generateMarkdown(userResponses, userInfo) {
 
       `
       
-      ## Usage 
+## Usage 
       
-      ${userResponses.usage}`
+${userResponses.usage}`
   };
 
 
@@ -76,9 +78,9 @@ function generateMarkdown(userResponses, userInfo) {
   if (userResponses.contributing !== '') {
     `
       
-      ## Contributing
+## Contributing
       
-      ${userResponses.contributing}`
+${userResponses.contributing}`
   };
 
 
@@ -88,9 +90,9 @@ function generateMarkdown(userResponses, userInfo) {
     draftReadme +=
       `
       
-      ## Tests
+## Tests
       
-      ${userResponses.tests}`
+${userResponses.tests}`
   };
 
 
@@ -98,28 +100,28 @@ function generateMarkdown(userResponses, userInfo) {
   draftReadme +=
     `
       
-      ## License
+## License
       
-      ${userResponses.license}
-      `;
+${userResponses.license}
+`;
 
   // Questions section
   draftReadme +=
     `
-    ---
+---
     
-    ## Questions?
+## Questions?
    
-    GitHub: [@${userInfo.login}](${userInfo.url})
-    `;
+GitHub: [@${githubInfo.login}](${githubInfo.url})
+`;
 
-  // Add GitHub email to Developer section
-  if (userInfo.email !== null) {
+  // Add GitHub email to Questions section
+  if (githubInfo.email !== null) {
 
     draftReadme +=
       `
-    Email: ${userInfo.email}
-    `
+Email: ${githubInfo.email}
+`
   };
 
 

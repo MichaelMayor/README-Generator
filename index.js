@@ -117,11 +117,11 @@ async function init() {
         console.log(githubInfo);
 
         // Pass userResponses and userInfo to generateMarkdown
-        // const markdown = generateMarkdown(userResponses, userInfo);
-        // console.log(markdown);
+        const markdown = generateMarkdown(userResponses, githubInfo);
+        console.log(markdown);
 
-        // // Write markdown to file
-        // await writeToFileAsync('ExampleREADME.md', markdown);
+        // Write markdown to file
+        await writeToFileAsync('ExampleREADME.md', markdown);
     } catch (error) {
         console.log(error);
     }
