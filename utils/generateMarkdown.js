@@ -22,6 +22,22 @@ function generateMarkdown(userResponses, userInfo) {
   draftToC += `
   * [License](#license)`
 
+ // Generate markdown the README Title, License Badge, and Repo badge
+ let draftReadme = 
+ `# ${userResponses.title}
+
+ ![GitHub Last Commit](https://img.shields.io/github/last-commit/${userResponses.username}/${userResponses.repo})![License: ${userResponses.license}](https://img.shields.io/badge/License-${userResponses.license}-blue.svg)`
+
+ // Add Table of Contents to markdown
+ draftReadme += draftToC;    
+
+ draftReadme +=
+ `
+ 
+ ## Description 
+ 
+ 
+ ${userResponses.description}`
 
 }
 
